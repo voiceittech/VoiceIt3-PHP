@@ -304,7 +304,7 @@ class VoiceIt3 {
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($crl, CURLOPT_CUSTOMREQUEST, 'PUT');
+    curl_setopt($crl, CURLOPT_CUSTOMREQUEST, 'DELETE');
     $fields = [
       'groupId' => $groupId,
       'userId' => $userId
