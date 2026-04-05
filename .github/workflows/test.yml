@@ -1,0 +1,28 @@
+name: API Test
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: curl
+      - name: Run API test
+        env:
+          VOICEIT_API_KEY: ${{ secrets.VOICEIT_API_KEY }}
+          VOICEIT_API_TOKEN: ${{ secrets.VOICEIT_API_TOKEN }}
+        run: |
+          php -r "
+          include 'voiceit/VoiceIt3.php';
+          \$vi = new VoiceIt\VoiceIt3(getenv('VOICEIT_API_KEY'), getenv('VOICEIT_API_TOKEN'));
+          \$r = json_decode(\$vi->createUser());
+          echo 'CreateUser: ' . \$r->responseCode . PHP_EOL;
+          \$r = json_decode(\$vi->getAllUsers());
+          echo 'GetAllUsers: ' . \$r->responseCode . PHP_EOL;
+          \$r = json_decode(\$vi->getPhrases('en-US'));
+          echo 'GetPhrases: ' . \$r->responseCode . PHP_EOL;
+          if (\$r->responseCode !== 'SUCC') exit(1);
+          echo 'All PHP tests passed!' . PHP_EOL;
+          "
