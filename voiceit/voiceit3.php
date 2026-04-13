@@ -3,7 +3,7 @@
 namespace VoiceIt;
 class VoiceIt3 {
 
-  const VERSION = '3.7.1';
+  const VERSION = '3.7.4';
   public $baseUrl;
   public $notificationUrl = '';
   public $apiKey;
