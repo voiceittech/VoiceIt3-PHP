@@ -27,7 +27,7 @@ class VoiceIt3 {
   }
 
   public function addNotificationUrl($url) {
-     $this->notificationUrl = '?notificationURL='.urlencode($url);
+     $this->notificationUrl = '?notificationURL='.rawurlencode($url);
   }
 
   public function removeNotificationUrl() {
@@ -40,7 +40,7 @@ class VoiceIt3 {
 
   public function getPhrases($contentLanguage) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/phrases/'.urlencode($contentLanguage).$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/phrases/'.rawurlencode($contentLanguage).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -70,7 +70,7 @@ class VoiceIt3 {
 
   public function checkUserExists($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.urlencode($userId).$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.rawurlencode($userId).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -80,7 +80,7 @@ class VoiceIt3 {
 
   public function deleteUser($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.urlencode($userId).$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.rawurlencode($userId).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -90,7 +90,7 @@ class VoiceIt3 {
 
   public function getGroupsForUser($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.urlencode($userId).'/groups'.$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.rawurlencode($userId).'/groups'.$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -100,7 +100,7 @@ class VoiceIt3 {
 
   public function deleteAllEnrollments($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/'.urlencode($userId).'/all'.$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/'.rawurlencode($userId).'/all'.$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -110,7 +110,7 @@ class VoiceIt3 {
 
   public function getAllVoiceEnrollments($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/voice/'.$userId.$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/voice/'.rawrawurlencode($userId).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -120,7 +120,7 @@ class VoiceIt3 {
 
   public function getAllFaceEnrollments($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/face/'.$userId.$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/face/'.rawrawurlencode($userId).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -130,7 +130,7 @@ class VoiceIt3 {
 
   public function getAllVideoEnrollments($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/video/'.$userId.$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/enrollments/video/'.rawrawurlencode($userId).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -251,7 +251,7 @@ class VoiceIt3 {
 
   public function getGroup($groupId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/groups/'.urlencode($groupId).$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/groups/'.rawurlencode($groupId).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -261,7 +261,7 @@ class VoiceIt3 {
 
   public function groupExists($groupId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/groups/'.urlencode($groupId).'/exists'.$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/groups/'.rawurlencode($groupId).'/exists'.$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -315,7 +315,7 @@ class VoiceIt3 {
 
   public function deleteGroup($groupId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/groups/'.urlencode($groupId).$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/groups/'.rawurlencode($groupId).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -528,7 +528,7 @@ class VoiceIt3 {
 
   public function createUserToken($userId, $secondsToTimeout) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.urlencode($userId).'/token?timeOut='.strval($secondsToTimeout));
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.rawurlencode($userId).'/token?timeOut='.strval($secondsToTimeout));
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -538,7 +538,7 @@ class VoiceIt3 {
 
   public function expireUserTokens($userId) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.urlencode($userId).'/expireTokens');
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/users/'.rawurlencode($userId).'/expireTokens');
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -585,7 +585,7 @@ class VoiceIt3 {
 
   public function regenerateSubAccountAPIToken($subAccountAPIKey) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/subaccount/'.urlencode($subAccountAPIKey).$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/subaccount/'.rawurlencode($subAccountAPIKey).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
@@ -595,7 +595,7 @@ class VoiceIt3 {
 
   public function deleteSubAccount($subAccountAPIKey) {
     $crl = curl_init();
-    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/subaccount/'.urlencode($subAccountAPIKey).$this->notificationUrl);
+    curl_setopt($crl, CURLOPT_URL, $this->baseUrl.'/subaccount/'.rawurlencode($subAccountAPIKey).$this->notificationUrl);
     curl_setopt($crl, CURLOPT_USERPWD, "$this->apiKey:$this->apiToken");
     curl_setopt($crl, CURLOPT_HTTPHEADER, array('platformId: '.$this->platformId, 'platformVersion: '.VoiceIt3::VERSION));
     curl_setopt($crl, CURLOPT_RETURNTRANSFER, true);
